@@ -25,7 +25,7 @@ jobs:
       - name: Run Lint
         run: |
           pylint src/
-          yapf -dr src/
+          yapf -r -i src/
 
       - name: Run Tests
         run: |
