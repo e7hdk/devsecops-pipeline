@@ -67,15 +67,12 @@ jobs:
       - name: Push Image to Google Artifact Registry
         run: docker push europe-west1-docker.pkg.dev/devsecops-460913/devsecops-repo/my-app:${{ github.sha }}
 
-      - name: Install gke-gcloud-auth-plugin
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y google-cloud-cli-gke-gcloud-auth-plugin
-
       - name: Get GKE Credentials
-        run: |
-          gcloud container clusters get-credentials devsecops-cluster \
-            --zone europe-west1-b --project devsecops-460913
+        uses: google-github-actions/get-gke-credentials@v1
+        with:
+          cluster_name: devsecops-cluster
+          location: europe-west1-b
+          project_id: devsecops-460913
 
       - name: Deploy to Kubernetes
         run: kubectl apply -f k8s/deployment.yaml
