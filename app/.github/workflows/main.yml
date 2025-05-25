@@ -64,7 +64,7 @@ jobs:
 
       - name: Get GKE Credentials
         run: |
-          gcloud container clusters get-credentials CLUSTER_NAME \
+          gcloud container clusters get-credentials devsecops-cluster \
             --zone europe-west1-b --project devsecops-460913
 
       - name: Deploy to Kubernetes
