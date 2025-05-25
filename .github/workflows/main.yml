@@ -67,6 +67,10 @@ jobs:
       - name: Push Image to Google Artifact Registry
         run: docker push europe-west1-docker.pkg.dev/devsecops-460913/devsecops-repo/my-app:${{ github.sha }}
 
+      - name: Install gke-gcloud-auth-plugin
+        run: |
+          gcloud components install gke-gcloud-auth-plugin --quiet
+
       - name: Get GKE Credentials
         run: |
           gcloud container clusters get-credentials devsecops-cluster \
