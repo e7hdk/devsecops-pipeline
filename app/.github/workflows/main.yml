@@ -52,20 +52,20 @@ jobs:
 
       - name: Build Docker Image
         run: |
-          docker build -t REGION-docker.pkg.dev/PROJECT_ID/REPO_NAME/my-app:${{ github.sha }} .
+          docker build -t -t europe-west1-docker.pkg.dev/devsecops-460913/devsecops-repo/my-app:${{ github.sha }} .
 
       - name: Scan Container with Trivy
         uses: aquasecurity/trivy-action@master
         with:
-          image-ref: REGION-docker.pkg.dev/PROJECT_ID/REPO_NAME/my-app:${{ github.sha }}
+          image-ref: europe-west1-docker.pkg.dev/devsecops-460913/devsecops-repo/my-app:${{ github.sha }}
 
       - name: Push Image to Google Artifact Registry
-        run: docker push REGION-docker.pkg.dev/PROJECT_ID/REPO_NAME/my-app:${{ github.sha }}
+        run: docker push europe-west1-docker.pkg.dev/devsecops-460913/devsecops-repo/my-app:${{ github.sha }}
 
       - name: Get GKE Credentials
         run: |
           gcloud container clusters get-credentials CLUSTER_NAME \
-            --zone ZONE --project PROJECT_ID
+            --zone europe-west1-b --project devsecops-460913
 
       - name: Deploy to Kubernetes
         run: kubectl apply -f k8s/deployment.yaml
