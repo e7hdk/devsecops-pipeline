@@ -57,7 +57,7 @@ jobs:
 
       - name: Build Docker Image
         run: |
-          docker build -t -t europe-west1-docker.pkg.dev/devsecops-460913/devsecops-repo/my-app:${{ github.sha }} .
+          docker build -t europe-west1-docker.pkg.dev/devsecops-460913/devsecops-repo/my-app:${{ github.sha }} .
 
       - name: Scan Container with Trivy
         uses: aquasecurity/trivy-action@master
