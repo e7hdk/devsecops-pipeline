@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: devsecops-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: devsecops
+  template:
+    metadata:
+      labels:
+        app: devsecops
+    spec:
+      containers:
+        - name: app
+          image: gcr.io/YOUR_PROJECT/my-app:latest
+          ports:
+            - containerPort: 5000
